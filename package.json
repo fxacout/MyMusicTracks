@@ -1,0 +1,25 @@
+{
+  "name": "MusicPlayerTest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "mongodb": "^3.6.2",
+    "mongoose": "^5.10.8",
+    "multer": "^1.4.2",
+    "uuid": "^8.3.1",
+    "ytdl-core": "^3.3.0"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4"
+  }
+}
