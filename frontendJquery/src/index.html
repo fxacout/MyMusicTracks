@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="./lib/jquery-3.5.1.js"></script>
+    <script src="./lib/audioplayer.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/bootstrap.css" />
+    <link rel="script" href="https://cdn.jsdelivr.net/npm/mediaelement/" />
+    <link rel="stylesheet" href="css/audioplayer.css" />
+    <title>MyMusicTracks</title>
+  </head>
+
+  <body>
+    <div class="container"></div>
+    <audio>
+      <source src="./public/test.mp3" />
+    </audio>
+    <script>
+      var desmontarTrack = function (track) {
+        // trackId name autor
+
+        let mapa = new Map();
+        $.each(track, function (indexInArray, valueOfElement) {
+          mapa.set(indexInArray, valueOfElement);
+        });
+        return (
+          "<div class='card '> <div class ='card-body'> <a class='card title'>" +
+          mapa.get("name") +
+          "-" +
+          mapa.get("autor") +
+          "</a> <a class='btn btn-primary btn-sm track' value='" +
+          mapa.get("trackId") +
+          "'> Listen </a> </div></div>"
+        );
+      };
+      var isPlaying = false;
+      var getData = function () {
+        $.getJSON("http://localhost:3000/tracks/", function (data) {
+          let items = [];
+          $.each(data, function (indexInArray, track) {
+            items.push(desmontarTrack(track));
+          });
+          $("<div>", {
+            class: "card-group",
+            html: items.join(""),
+          }).appendTo(".container");
+
+          $(".track").click(function (e) {
+            e.preventDefault();
+            
+            var pathToMP3 =$(this).attr('value');
+            $("source").replaceWith("<source src='http://localhost:3000/tracks/" + pathToMP3 + "'/>");
+            $("audio").audioPlayer();
+          });
+        });
+      };
+
+      getData();
+    </script>
+    <script></script>
+  </body>
+</html>
+
+<!--
+    TODO: Hacer que vaya por cards simples y luego que la card reproduzca la cancion
+
+
+
+
+
+-->
